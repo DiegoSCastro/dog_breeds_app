@@ -28,7 +28,7 @@ class _SplashPageState extends State<SplashPage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Dogs App',
+                'Dog Breeds App',
                 style: context.text.displaySmall.copyWith(color: Colors.white),
               ),
               const SizedBox(height: 24),

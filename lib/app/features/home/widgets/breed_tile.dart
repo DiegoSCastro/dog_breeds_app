@@ -17,13 +17,6 @@ class BreedTile extends StatelessWidget {
     this.onTapFavorite,
   });
 
-  Icon getIcon(bool isFavorite, BuildContext context) {
-    return Icon(
-      isFavorite ? Icons.favorite : Icons.favorite_border,
-      color: isFavorite ? context.color.red : context.color.grey,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -44,7 +37,7 @@ class BreedTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              name,
+              name.capitalize(),
               style: context.text.titleMedium,
             ),
             IconButton(
@@ -54,6 +47,13 @@ class BreedTile extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Icon getIcon(bool isFavorite, BuildContext context) {
+    return Icon(
+      isFavorite ? Icons.favorite : Icons.favorite_border,
+      color: isFavorite ? context.color.red : context.color.grey,
     );
   }
 }
