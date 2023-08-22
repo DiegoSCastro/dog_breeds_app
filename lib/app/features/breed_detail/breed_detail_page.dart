@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -68,20 +67,8 @@ class _BreedDetailPageState extends State<BreedDetailPage> {
                     ),
                     if (_breed.subBreed.isNotEmpty) const SizedBox(height: 24),
                     Expanded(
-                      child: GridView.builder(
-                        shrinkWrap: true,
-                        itemCount: imageUrls.length,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 16,
-                          mainAxisSpacing: 16,
-                        ),
-                        itemBuilder: (context, index) {
-                          final imageUrl = imageUrls[index];
-                          return Image.network(
-                            imageUrl,
-                          );
-                        },
+                      child: ImagesGridView(
+                        imageUrls: imageUrls,
                       ),
                     ),
                   ],

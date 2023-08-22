@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    cubit.getAllBreeds();
+    cubit.fetchData();
     super.initState();
   }
 
@@ -48,7 +48,10 @@ class _HomePageState extends State<HomePage> {
                     onTap: () {
                       Navigator.of(context).pushNamed('/breedDetail', arguments: breed);
                     },
-                    onTapFavorite: () {},
+                    onTapFavorite: () {
+                      cubit.toggleFavorite(breed);
+                    },
+                    isFavorite: cubit.isFavorite(breed),
                   );
                 },
                 separatorBuilder: (context, index) {
