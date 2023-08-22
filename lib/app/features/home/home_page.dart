@@ -45,7 +45,9 @@ class _HomePageState extends State<HomePage> {
                   final breed = breeds[index];
                   return BreedTile(
                     name: breed.name,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).pushNamed('/breedDetail', arguments: breed);
+                    },
                     onTapFavorite: () {},
                   );
                 },

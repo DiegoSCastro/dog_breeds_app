@@ -29,4 +29,18 @@ class BreedRepositoryImpl implements BreedRepository {
       throw Exception(e.message);
     }
   }
+
+  @override
+  Future<List<String>> getBreedImageUrls({required String breed, String? subBreed}) async {
+    try {
+      final url =
+          subBreed == null ? '/api/breed/$breed/images' : '/api/breed/$breed/$subBreed/images';
+      final response = await _dio.get(url);
+
+      return (response.data['message'] as List<dynamic>).cast<String>();
+    } on DioException catch (e, s) {
+      log('error searching breed images', error: e, stackTrace: s);
+      throw Exception(e.message);
+    }
+  }
 }
