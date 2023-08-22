@@ -29,7 +29,11 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.only(right: 16),
             child: IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/favorites');
+                Navigator.pushNamed(
+                  context,
+                  '/favorites',
+                  arguments: cubit.favoriteList,
+                );
               },
               icon: Icon(
                 Icons.favorite,

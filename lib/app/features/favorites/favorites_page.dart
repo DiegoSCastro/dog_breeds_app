@@ -10,7 +10,13 @@ class FavoritesPage extends StatefulWidget {
 }
 
 class _FavoritesPageState extends State<FavoritesPage> {
-  final cubit = sl<HomeCubit>();
+  late final List<Breed> favoriteList;
+
+  @override
+  void didChangeDependencies() {
+    favoriteList = ModalRoute.of(context)?.settings.arguments as List<Breed>;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +26,17 @@ class _FavoritesPageState extends State<FavoritesPage> {
       ),
       body: ListView.separated(
         padding: const EdgeInsets.all(24),
-        itemCount: cubit.favoriteList.length,
+        itemCount: favoriteList.length,
         itemBuilder: (context, index) {
-          final favorite = cubit.favoriteList[index];
+          final favorite = favoriteList[index];
           return BreedTile(
             name: favorite.name,
             onTap: () {
-              Navigator.of(context).pushNamed('/breedDetail', arguments: favorite);
+              Navigator.of(context).pushNamed(
+                '/breedDetail',
+                arguments: favorite,
+              );
             },
-            onTapFavorite: () {
-              cubit.toggleFavorite(favorite);
-            },
-            isFavorite: cubit.isFavorite(favorite),
           );
         },
         separatorBuilder: (context, index) {

@@ -17,11 +17,20 @@ class ImagesGridView extends StatelessWidget {
       ),
       itemBuilder: (context, index) {
         final imageUrl = imageUrls[index];
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: CachedNetworkImage(
-            imageUrl: imageUrl,
-            fit: BoxFit.cover,
+        return InkWell(
+          onTap: () => Navigator.of(context).pushNamed(
+            '/full_screen',
+            arguments: imageUrl,
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Hero(
+              tag: imageUrl,
+              child: CachedNetworkImage(
+                imageUrl: imageUrl,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
         );
       },
