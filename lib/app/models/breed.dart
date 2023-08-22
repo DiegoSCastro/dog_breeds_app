@@ -9,7 +9,7 @@ class Breed with _$Breed {
 
   const factory Breed({
     @Default('') String name,
-    @Default([]) List<String> subBreed,
+    @Default([]) List<String> subBreed, 
   }) = _Breed;
 
   factory Breed.fromJson(Map<String, dynamic> json) => _$BreedFromJson(json);

@@ -1,7 +1,9 @@
 part of 'home_cubit.dart';
 
 @immutable
-sealed class HomeState {}
+sealed class HomeState {
+   List<Object?> get props => [];
+}
 
 class HomeInitial extends HomeState {}
 
@@ -25,10 +27,15 @@ class HomeSuccess extends HomeState {
       favorites: favorites ?? this.favorites,
     );
   }
+  @override
+  List<Object?> get props => [breeds, favorites];
 }
 
 class HomeError extends HomeState {
   final String errorMessage;
 
   HomeError({required this.errorMessage});
+
+  @override
+  List<Object?> get props => [errorMessage];
 }
