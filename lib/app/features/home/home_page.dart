@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../app.dart';
-import 'home_cubit.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -25,6 +24,20 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dog Breeds'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/favorites');
+              },
+              icon: Icon(
+                Icons.favorite,
+                color: context.color.red,
+              ),
+            ),
+          )
+        ],
       ),
       body: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
@@ -52,6 +65,7 @@ class _HomePageState extends State<HomePage> {
                       cubit.toggleFavorite(breed);
                     },
                     isFavorite: cubit.isFavorite(breed),
+                    showFavoriteIcon: true,
                   );
                 },
                 separatorBuilder: (context, index) {

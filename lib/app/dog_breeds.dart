@@ -18,11 +18,7 @@ class DogBreedsApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeConfig.theme,
         initialRoute: '/',
-        routes: {
-          '/': (_) => const SplashPage(),
-          '/home': (_) => const HomePage(),
-          '/breedDetail': (_) => const BreedDetailPage(),
-        },
+        routes: AppRoutes.routes,
       ),
     );
   }

@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 
 import '../../../app.dart';
-import '../../../core/ui/app_shadows.dart';
 
 class BreedTile extends StatelessWidget {
   final String name;
   final bool isFavorite;
   final VoidCallback? onTap;
   final VoidCallback? onTapFavorite;
+  final bool showFavoriteIcon;
 
   const BreedTile({
     super.key,
     required this.name,
-    this.isFavorite = false,
     this.onTap,
     this.onTapFavorite,
+    this.isFavorite = false,
+    this.showFavoriteIcon = false,
   });
 
   @override
@@ -36,13 +37,22 @@ class BreedTile extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              name.capitalize(),
-              style: context.text.titleMedium,
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: Text(
+                name.capitalize(),
+                style: context.text.titleMedium,
+              ),
             ),
-            IconButton(
-              onPressed: onTapFavorite,
-              icon: getIcon(isFavorite, context),
+            Visibility(
+              visible: showFavoriteIcon,
+              child: IconButton(
+                onPressed: onTapFavorite,
+                icon: getIcon(
+                  context,
+                  isFavorite,
+                ),
+              ),
             ),
           ],
         ),
@@ -50,7 +60,7 @@ class BreedTile extends StatelessWidget {
     );
   }
 
-  Icon getIcon(bool isFavorite, BuildContext context) {
+  Icon getIcon(BuildContext context, bool isFavorite) {
     return Icon(
       isFavorite ? Icons.favorite : Icons.favorite_border,
       color: isFavorite ? context.color.red : context.color.grey,

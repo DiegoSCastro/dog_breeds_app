@@ -1,7 +1,6 @@
 import 'package:get_it/get_it.dart';
 
 import '../../app.dart';
-import '../../features/home/home_cubit.dart';
 
 final sl = GetIt.instance;
 

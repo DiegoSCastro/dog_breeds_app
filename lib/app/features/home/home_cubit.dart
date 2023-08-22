@@ -30,7 +30,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  List<Breed> get _favorites {
+  List<Breed> get favoriteList {
     if (state is HomeSuccess) {
       return (state as HomeSuccess).favorites;
     }
@@ -39,7 +39,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   void toggleFavorite(Breed breed) {
     if (state is HomeSuccess) {
-      final favorites = _favorites;
+      final favorites = favoriteList;
       if (favorites.contains(breed)) {
         favorites.remove(breed);
       } else {
@@ -53,12 +53,12 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   bool isFavorite(Breed breed) {
-    return _favorites.contains(breed);
+    return favoriteList.contains(breed);
   }
 
   void saveFavorites() async {
     if (state is HomeSuccess) {
-      final List<String> items = _favorites.map((e) => jsonEncode(e.toJson())).toList();
+      final List<String> items = favoriteList.map((e) => jsonEncode(e.toJson())).toList();
       await localStorage.write(AppConstants.favorites, items);
     }
   }
