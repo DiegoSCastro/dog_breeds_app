@@ -33,7 +33,7 @@ flutter test
 
 If you want to test it as an end user or QA, download and install the file below on an Android device.
 
-Download the file -
+Download the file - https://drive.google.com/file/d/1bp9_e3zdGX67_Aop6qJF_bKcfQxONrK2/view?usp=sharing
 
 ## Implemented Features:
 
