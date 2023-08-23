@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +22,11 @@ class BreedDetailCubit extends Cubit<BreedDetailState> {
         breed: breed,
         subBreed: subBreed,
       );
-      saveFiveImageUrls(imageUrls: response.sublist(0, 5), breedName: breed);
+      final saveImages = response.length >= 5 ? response.sublist(0, 5) : response;
+      _saveFiveImageUrls(
+        imageUrls: saveImages,
+        breedName: breed,
+      );
 
       emit(BreedDetailSuccess(imageUrls: response));
     } on Exception catch (e, s) {
@@ -32,7 +35,7 @@ class BreedDetailCubit extends Cubit<BreedDetailState> {
     }
   }
 
-  void saveFiveImageUrls({
+  void _saveFiveImageUrls({
     required List<String> imageUrls,
     required breedName,
   }) async {

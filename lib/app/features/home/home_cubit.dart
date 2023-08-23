@@ -16,9 +16,9 @@ class HomeCubit extends Cubit<HomeState> {
     required this.localStorage,
   }) : super(HomeInitial());
 
-  Future<void> fetchData() async => getAllBreeds().then((_) => loadFavorites());
+  Future<void> fetchData() async => _getAllBreeds().then((_) => _loadFavorites());
 
-  Future<void> getAllBreeds() async {
+  Future<void> _getAllBreeds() async {
     emit(HomeLoading());
     try {
       final response = await breedRepository.getAllBreeds();
@@ -48,7 +48,7 @@ class HomeCubit extends Cubit<HomeState> {
       emit(
         (state as HomeSuccess).copyWith(favorites: favorites),
       );
-      saveFavorites();
+      _saveFavorites();
     }
   }
 
@@ -56,20 +56,20 @@ class HomeCubit extends Cubit<HomeState> {
     return favoriteList.contains(breed);
   }
 
-  void saveFavorites() async {
+  void _saveFavorites() async {
     if (state is HomeSuccess) {
       final List<String> items = favoriteList.map((e) => jsonEncode(e.toJson())).toList();
       await localStorage.write(AppConstants.favorites, items);
     }
   }
 
-  Future<List<Breed>> loadFavoritesFromStorage() async {
+  Future<List<Breed>> _loadFavoritesFromStorage() async {
     final storageFavorites = await localStorage.read<List<String>>(AppConstants.favorites);
 
     return storageFavorites?.map((item) => Breed.fromJson(jsonDecode(item))).toList() ?? [];
   }
 
-  void updateFavorites(List<Breed> favorites) {
+  void _updateFavorites(List<Breed> favorites) {
     if (state is HomeSuccess) {
       emit(
         (state as HomeSuccess).copyWith(favorites: favorites),
@@ -77,10 +77,10 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  void loadFavorites() async {
+  void _loadFavorites() async {
     if (state is HomeSuccess) {
-      final favorites = await loadFavoritesFromStorage();
-      updateFavorites(favorites);
+      final favorites = await _loadFavoritesFromStorage();
+      _updateFavorites(favorites);
     }
   }
 }

@@ -34,7 +34,10 @@ class _FullScreenPageState extends State<FullScreenPage> {
             child: Center(
               child: InteractiveViewer(
                 clipBehavior: Clip.none,
-                child: Hero(tag: imageUrl, child: CachedNetworkImage(imageUrl: imageUrl)),
+                child: Hero(
+                  tag: imageUrl,
+                  child: CachedNetworkImage(imageUrl: imageUrl),
+                ),
               ),
             ),
           ),

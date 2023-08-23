@@ -1,5 +1,4 @@
 import '../app.dart';
-import '../features/full_screen/full_screen_page.dart';
 
 sealed class AppRoutes {
   static final routes = {
