@@ -2,9 +2,10 @@ import 'package:dog_breeds_app/app/app.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-
 class MockCustomDio extends Mock implements CustomDio {}
+
 class MockLocalStorage extends Mock implements LocalStorage {}
+
 class MockBreedRepository extends Mock implements BreedRepository {}
 
 void main() {
@@ -46,6 +47,7 @@ void initTestServiceLocator({
   sl.registerLazySingleton<BreedDetailCubit>(
     () => BreedDetailCubit(
       breedRepository: sl<BreedRepository>(),
+      localStorage: sl<LocalStorage>(),
     ),
   );
 }

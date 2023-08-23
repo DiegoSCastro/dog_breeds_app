@@ -21,6 +21,7 @@ void initServiceLocator() {
   sl.registerLazySingleton<BreedDetailCubit>(
     () => BreedDetailCubit(
       breedRepository: sl<BreedRepository>(),
+      localStorage: sl<LocalStorage>(),
     ),
   );
 }

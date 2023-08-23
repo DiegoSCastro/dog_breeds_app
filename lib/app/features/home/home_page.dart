@@ -53,7 +53,16 @@ class _HomePageState extends State<HomePage> {
                 child: CircularProgressIndicator(),
               ),
             HomeError(:final errorMessage) => Center(
-                child: Text(errorMessage),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(errorMessage),
+                    ElevatedButton(
+                      onPressed: () => cubit.fetchData(),
+                      child: const Text('Try again'),
+                    )
+                  ],
+                ),
               ),
             HomeSuccess(:final breeds) => ListView.separated(
                 padding: const EdgeInsets.all(24),
@@ -62,14 +71,13 @@ class _HomePageState extends State<HomePage> {
                   final breed = breeds[index];
                   return BreedTile(
                     name: breed.name,
-                    onTap: () {
-                      Navigator.of(context).pushNamed('/breedDetail', arguments: breed);
-                    },
-                    onTapFavorite: () {
-                      cubit.toggleFavorite(breed);
-                    },
+                    onTap: () => Navigator.of(context).pushNamed(
+                      '/breedDetail',
+                      arguments: breed,
+                    ),
+                    onTapFavorite: () => cubit.toggleFavorite(breed),
                     isFavorite: cubit.isFavorite(breed),
-                    showFavoriteIcon: true,
+                    onHomePage: true,
                   );
                 },
                 separatorBuilder: (context, index) {

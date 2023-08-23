@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app.dart';
@@ -7,7 +8,8 @@ class BreedTile extends StatelessWidget {
   final bool isFavorite;
   final VoidCallback? onTap;
   final VoidCallback? onTapFavorite;
-  final bool showFavoriteIcon;
+  final bool onHomePage;
+  final List<String> imageUrls;
 
   const BreedTile({
     super.key,
@@ -15,7 +17,8 @@ class BreedTile extends StatelessWidget {
     this.onTap,
     this.onTapFavorite,
     this.isFavorite = false,
-    this.showFavoriteIcon = false,
+    this.onHomePage = false,
+    this.imageUrls = const [],
   });
 
   @override
@@ -34,25 +37,34 @@ class BreedTile extends StatelessWidget {
             context.shadows.cardShadow,
           ],
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Text(
-                name.capitalize(),
-                style: context.text.titleMedium,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Text(
+                    name.capitalize(),
+                    style: context.text.titleMedium,
+                  ),
+                ),
+                Visibility(
+                  visible: onHomePage,
+                  child: IconButton(
+                    onPressed: onTapFavorite,
+                    icon: getIcon(
+                      context,
+                      isFavorite,
+                    ),
+                  ),
+                ),
+              ],
             ),
             Visibility(
-              visible: showFavoriteIcon,
-              child: IconButton(
-                onPressed: onTapFavorite,
-                icon: getIcon(
-                  context,
-                  isFavorite,
-                ),
-              ),
+              visible: imageUrls.isNotEmpty || onHomePage,
+              replacement: const Text('You need to tap here to see details and cache the images.'),
+              child: ImagesListRow(imageUrls: imageUrls),
             ),
           ],
         ),

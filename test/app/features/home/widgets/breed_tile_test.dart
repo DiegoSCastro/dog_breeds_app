@@ -12,7 +12,7 @@ void main() {
             isFavorite: false,
             onTap: () {},
             onTapFavorite: () {},
-            showFavoriteIcon: true,
+            onHomePage: true,
           ),
         ),
       ),
